@@ -1,6 +1,10 @@
 {
     "dogsList": [
-        "https://images.dog.ceo/breeds/beagle/n02088364_4706.jpg",
-        "https://images.dog.ceo/breeds/pointer-germanlonghair/hans4.jpg"
+        "https://images.dog.ceo/breeds/borzoi/n02090622_5602.jpg",
+        "https://images.dog.ceo/breeds/spaniel-welsh/n02102177_661.jpg",
+        "https://images.dog.ceo/breeds/terrier-cairn/n02096177_1988.jpg",
+        "https://images.dog.ceo/breeds/terrier-westhighland/n02098286_6205.jpg",
+        "https://images.dog.ceo/breeds/hound-english/n02089973_3420.jpg",
+        "https://images.dog.ceo/breeds/terrier-silky/n02097658_9330.jpg"
     ]
 }
