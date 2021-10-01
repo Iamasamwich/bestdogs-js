@@ -1,14 +1,44 @@
+const addDog = require('../db/addDog');
+const removeDog = require('../db/removeDog');
+
 module.exports = {
   addDog (req, res) {
-    res.status(201).json({
-      message: 'adding',
-      dogId: req.params.url
-    });
+    addDog(req)
+    .then(resp => {
+      console.log(resp);
+      return resp
+    })
+    .then(resp => {
+      res.status(resp.status).json({
+        status: resp.status,
+        message: resp.message
+      })
+    })
+    .catch(err => {
+      res.status(err.status).json({
+        status: err.status,
+        message: err.message
+      })
+    })
   },
   removeDog (req, res) {
-    res.status(200).json({
-      message: 'removing',
-      dogId: req.params.url
+    removeDog(req)
+    .then(resp => {
+      console.log(resp);
+      return resp;
+    })
+    .then(resp => {
+      res.status(resp.status).json({
+        message: 'removing',
+        dogId: req.params.url,
+        list: resp.list
+      });
+    })
+    .catch(err => {
+      res.status(err.status).json({
+        status: err.status,
+        message: err.message
+      });
     });
   }
 };
