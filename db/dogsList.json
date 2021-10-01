@@ -1,13 +1,9 @@
 {
     "dogsList": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        "ruffus",
+        "butcher",
+        "mollie",
+        "ruby",
+        "ralph"
     ]
 }

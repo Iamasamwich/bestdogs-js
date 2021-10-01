@@ -20,11 +20,7 @@ module.exports = {
       });
     })
   },
-
-
   addDog (req, res) {
-
-    console.log('xxxx', req.body);
     addDog(req)
     .then(resp => {
       return res.status(resp.status).json({
