@@ -3,6 +3,7 @@ const dogs = require('../controllers');
 
 module.exports = (app) => {
 
+  app.get('/getdogs', dogs.getDogs);
   app.get('/adddog/:url', dogs.addDog);
   app.get('/removedog/:url', dogs.removeDog);
 
