@@ -23,11 +23,9 @@ module.exports = {
 
 
   addDog (req, res) {
+
+    console.log('xxxx', req.body);
     addDog(req)
-    .then(resp => {
-      console.log(resp);
-      return resp
-    })
     .then(resp => {
       return res.status(resp.status).json({
         status: resp.status,
@@ -35,18 +33,19 @@ module.exports = {
       })
     })
     .catch(err => {
-      return res.status(err.status).json({
-        status: err.status,
-        message: err.message
-      })
+      if (err.status && err.message) {
+        return res.status(err.status).json({
+          status: err.status,
+          message: err.message
+        })
+      } else {
+        console.log(err);
+        return res.status(500);
+      }
     })
   },
   removeDog (req, res) {
     removeDog(req)
-    .then(resp => {
-      console.log(resp);
-      return resp;
-    })
     .then(resp => {
       return res.status(resp.status).json({
         message: 'removing',

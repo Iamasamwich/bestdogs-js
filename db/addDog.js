@@ -1,6 +1,7 @@
 const db = require('./');
 
 module.exports = (req) => {
+  console.log(req.body);
   async function checkIfThere (url) {
     const list = await db.getData('/dogsList');
     if (list.indexOf(url) === -1) {
