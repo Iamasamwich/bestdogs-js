@@ -2,6 +2,15 @@ const db = require('./');
 
 module.exports = (req) => {
 
+  async function validate (req) {
+    if (
+      !req.body ||
+      !req.body.dog ||
+      typeof(req.body.dog) !== 'string'
+    ) throw ({status: 406, message: 'invalid'});
+    return req;
+  };
+
   async function getList (url) {
     const list = await db.getData('/dogsList');
     return ({list, url});
@@ -24,7 +33,8 @@ module.exports = (req) => {
   };
 
 
-  return getList(req.params.url)
+  return validate(req)
+  .then(req => getList(req.body.dog))
   .then(resp => checkIfInList(resp))
   .then(newList => updateDB(newList))
   .then(newList => ({status: 201, message: 'dog removed', list: newList}))

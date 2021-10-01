@@ -21,6 +21,7 @@ module.exports = {
     })
   },
   addDog (req, res) {
+    console.log('add dog', req.body);
     addDog(req)
     .then(resp => {
       return res.status(resp.status).json({
@@ -41,6 +42,7 @@ module.exports = {
     })
   },
   removeDog (req, res) {
+    console.log('remove dog', req.body);
     removeDog(req)
     .then(resp => {
       return res.status(resp.status).json({
