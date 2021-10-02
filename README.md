@@ -40,21 +40,21 @@
 
 * Clone the server repo
 
-\> `git clone https://github.com/Iamasamwich/bestdogs-js.git`
+bestdogs\> `git clone https://github.com/Iamasamwich/bestdogs-js.git`
 
 * Change into the directory and install the npm packagaes
 
-\> `cd bestdogs-js`
+bestdogs\> `cd bestdogs-js`
 
- bestdogs-js\> `npm install`
+bestdogs/bestdogs-js\> `npm install`
 
 * Start the server
 
-bestdogs-js\> `npm start`
+bestdogs/bestdogs-js\> `npm start`
 
 * Run the tests
 
-bestdogs-js\> `npm test`
+bestdogs/bestdogs-js\> `npm test`
 
 * To look at the app go to http://localhost:8080
 
