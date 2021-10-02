@@ -8,7 +8,7 @@ module.exports = (req) => {
       !req.body.dog ||
       typeof(req.body.dog) !== 'string'
     ) throw ({status: 406, message: 'invalid'});
-    return req;
+    return req.body.dog;
   };
 
   async function getList (url) {
@@ -34,9 +34,9 @@ module.exports = (req) => {
 
 
   return validate(req)
-  .then(req => getList(req.body.dog))
-  .then(resp => checkIfInList(resp))
-  .then(newList => updateDB(newList))
+  .then(getList)
+  .then(checkIfInList)
+  .then(updateDB)
   .then(newList => ({status: 201, message: 'dog removed', list: newList}))
   .catch(err => {
     throw(err)

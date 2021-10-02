@@ -8,7 +8,7 @@ module.exports = (req) => {
       !req.body.dog ||
       typeof(req.body.dog) !== 'string'
     ) throw ({status: 406, message: 'invalid'})
-    return req;
+    return req.body.dog;
   };
 
   async function checkIfThere (url) {
@@ -26,8 +26,8 @@ module.exports = (req) => {
   };
 
   return validate(req)
-  .then(req => checkIfThere(req.body.dog))
-  .then(url => addDog(url))
+  .then(checkIfThere)
+  .then(addDog)
   .then(() => ({status: 201, message: 'dog added'}))
   .catch(err => {
     throw err;
