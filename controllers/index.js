@@ -4,8 +4,7 @@ const removeDog = require('../db/removeDog');
 
 module.exports = {
   getDogs (req, res) {
-    console.log('getting dogs');
-    getDogs()
+    return getDogs()
     .then(resp => {
       return res.status(resp.status).json({
         status: resp.status,
@@ -21,13 +20,9 @@ module.exports = {
     })
   },
   addDog (req, res) {
-    console.log('add dog', req.body);
-    addDog(req)
+    return addDog(req)
     .then(resp => {
-      return res.status(resp.status).json({
-        status: resp.status,
-        message: resp.message
-      })
+      return res.status(resp.status).json(resp);
     })
     .catch(err => {
       if (err.status && err.message) {
@@ -42,8 +37,7 @@ module.exports = {
     })
   },
   removeDog (req, res) {
-    console.log('remove dog', req.body);
-    removeDog(req)
+    return removeDog(req)
     .then(resp => {
       return res.status(resp.status).json({
         message: 'removing',

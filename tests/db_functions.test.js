@@ -35,14 +35,27 @@ describe('dog functions', () => {
     });
   });
 
+  test('addDog: it returns the list of dogs', () => {
+    req.body.dog = 'test 3';
+    return addDog(req)
+    .then(resp => {
+      expect(resp.status).toBe(201);
+      expect(resp.message).toBe('dog added');
+      expect(resp.list).toBeTruthy();
+      expect(resp.list.indexOf('test 1')).toBe(resp.list.length - 3);
+      expect(resp.list.indexOf('test 2')).toBe(resp.list.length - 2);
+      expect(resp.list.indexOf('test 3')).toBe(resp.list.length - 1);
+    });
+  });
+
   test('getDogs: it returns a list of dogs', () => {
     return getDogs()
     .then(resp => {
       expect(resp.status).toBe(200);
       expect(resp.message).toBe('dogs fetched... irony');
       expect(resp.list.length).toBeGreaterThanOrEqual(2)
-    })
-  })
+    });
+  });
 
   test('removeDog: it removes a dog', () => {
     req.body.dog = 'test 1';
@@ -61,8 +74,17 @@ describe('dog functions', () => {
     });
   });
 
-  test('cleaning up test cases', () => {
+  test('removeDog: it returns a list of dogs', () => {
     req.body.dog = 'test 2';
-    removeDog(req);
+    return removeDog(req)
+    .then(resp => {
+      expect(resp.list).toBeTruthy();
+      expect(resp.list.indexOf('test 2')).toBe(-1);
+      expect(resp.list.indexOf('test 3')).toBe(resp.list.length - 1);
+    });
+  });
+
+  test('cleaning up test cases', () => {
+    removeDog({body: {dog: 'test 3'}});
   })
 });

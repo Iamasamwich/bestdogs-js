@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --ignore './db/dogsList.json' .",
-    "test": "jest --detectOpenHandles --verbose"
+    "start": "nodemon --ignore './db/dogsList.json' index.js",
+    "test": "jest --detectOpenHandles --verbose --coverage"
   },
   "author": "",
   "license": "ISC",

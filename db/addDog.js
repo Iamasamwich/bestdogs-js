@@ -1,4 +1,5 @@
 const db = require('./');
+const getDogs = require('./getDogs');
 
 module.exports = (req) => {
 
@@ -28,7 +29,8 @@ module.exports = (req) => {
   return validate(req)
   .then(checkIfThere)
   .then(addDog)
-  .then(() => ({status: 201, message: 'dog added'}))
+  .then(getDogs)
+  .then(resp => ({status: 201, message: 'dog added', list: resp.list}))
   .catch(err => {
     throw err;
   });
