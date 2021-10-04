@@ -1,3 +1,6 @@
 {
-    "dogsList": []
+    "dogsList": [
+        "https://images.dog.ceo/breeds/pyrenees/n02111500_2010.jpg",
+        "https://images.dog.ceo/breeds/frise-bichon/stevebaxter_bichon_frise.jpg"
+    ]
 }
