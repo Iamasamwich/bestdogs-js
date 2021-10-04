@@ -62,10 +62,16 @@ bestdogs/bestdogs-js\> `npm test`
 
 * On client load
   * Fetch list of favourite dogs from DB, if there are any it sets array of favourite dogs which will display in the bottom panel.
+
   * When Next is clicked a new dog is fetched from the Dog API, and added to the array of viewed dogs.
+
   * Array of viewed dogs is limited to maximum 10.
+
   * Clicking Previous shows the previous dog in the array until there are no previous dogs. Clicking Next after going back will fetch a new dog (ie - you can't see the same dogs again after going back)
-  * Clicking favourite add the dog to the favourite list in the app and send a POST request to /adddog to add it to the database
+
+  * Clicking favourite will send a POST request to /adddog. The db is updated with the new dog and the updated list is returned to the client to display in the Favourite Dogs panel.
+
   * If the current dog is already favourited, the button changes to Unfavourite
-  * Clicking Unfavourite will update the list in the app and send a PUT request to /removedog to remove it from the database
+
+  * Clicking Unfavourite will send a PUT request to /removedog. This will remove the dog from the db and send the updated favourites list back to the client to show in the Favourite Dogs panel.
   
