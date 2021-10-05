@@ -1,16 +1,13 @@
 const db = require('./');
+const {getDogsFromDB} = require('./db_functions');
 
-const getDogs = (req) => {
-  async function getDogs() {
-    const list = await db.getData('/dogsList');
-    return list;
-  };
 
-  return getDogs()
-  .then(res => ({status: 200, message: 'dogs fetched... irony', list: res}))
-  .catch(err => {
-    throw err;
-  });
+const getDogs = () => {
+  return getDogsFromDB()
+    .then(list => ({status: 200, message: 'dogs fetched... irony', list}))
+    .catch(err => {
+      throw err;
+    });
 };
 
 module.exports = getDogs;

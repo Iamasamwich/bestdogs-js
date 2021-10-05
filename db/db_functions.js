@@ -35,7 +35,7 @@ const addDogToDB = async (dog) => {
   return;
 };
 
-const getDogs = async () => {
+const getDogsFromDB = async () => {
   //gets a list of dogs from the db
   const list = await db.getData('/dogsList');
   return list;
@@ -45,5 +45,5 @@ module.exports = {
   validate,
   checkIfAlreadyInDB,
   addDogToDB,
-  getDogs
+  getDogsFromDB
 }
