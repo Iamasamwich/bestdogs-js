@@ -1,11 +1,10 @@
-const dogs = require('../controllers');
-
+const dogsController = require('../controllers').dogsController;
 
 module.exports = (app) => {
 
-  app.get('/getdogs', dogs.getDogs);
-  app.post('/adddog', dogs.addDog);
-  app.put('/removedog', dogs.removeDog);
+  app.get('/getdogs', dogsController.getDogs);
+  app.post('/adddog', dogsController.addDog);
+  app.put('/removedog', dogsController.removeDog);
 
   app.get('*', (req, res) => {
     res.status(404).send();
