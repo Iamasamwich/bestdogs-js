@@ -1,10 +1,10 @@
-const dogsController = require('../controllers').dogsController;
+const controllers = require('../controllers');
 
 const router = (app) => {
 
-  app.get('/getdogs', dogsController.getDogs);
-  app.post('/adddog', dogsController.addDog);
-  app.put('/removedog', dogsController.removeDog);
+  app.get('/getdogs', controllers.getDogs);
+  app.post('/adddog', controllers.addDog);
+  app.put('/removedog', controllers.removeDog);
 
   app.get('*', (req, res) => {
     res.status(404).send();

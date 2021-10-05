@@ -1,3 +1,19 @@
 {
-    "dogsList": []
+    "dogsList": [
+        {
+            "id": "https://images.dog.ceo/breeds/spaniel-cocker/n02102318_11890.jpg"
+        },
+        {
+            "id": "https://images.dog.ceo/breeds/buhund-norwegian/hakon2.jpg"
+        },
+        {
+            "id": "https://images.dog.ceo/breeds/malinois/n02105162_5557.jpg"
+        },
+        {
+            "id": "https://images.dog.ceo/breeds/brabancon/n02112706_637.jpg"
+        },
+        {
+            "id": "https://images.dog.ceo/breeds/saluki/n02091831_1110.jpg"
+        }
+    ]
 }

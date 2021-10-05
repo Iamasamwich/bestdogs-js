@@ -2,8 +2,7 @@ const db = require('../db');
 
 const checkIfAlreadyInDB = (dog) => {
   //takes the dog
-  //if the dog is in the list it returns ({inDB: true, dog, list})
-  //if the dog is not in the list it returns ({inDB: false, dog, list})
+  //returns true of false depending on whether it's in the db
   return new Promise(async (resolve) => {
     const index = await db.getIndex('/dogsList', dog);
     if (index === -1) {

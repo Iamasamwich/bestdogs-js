@@ -1,7 +1,11 @@
-const dogsController = require('./dogsController');
+const getDogs = require('./dogsControllers/getDogs');
+const addDog = require('./dogsControllers/addDog');
+const removeDog = require('./dogsControllers/removeDog');
 
-const controllerList = {
-  dogsController
+const controllers = {
+  getDogs,
+  addDog,
+  removeDog
 };
 
-module.exports = controllerList;
+module.exports = controllers;

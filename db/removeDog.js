@@ -14,8 +14,8 @@ const removeDog = (req) => {
   .then(getDogsFromDB)
   .then(list => ({status: 200, message: 'dog removed', list}))
   .catch(err => {
-    throw(err)
-  })
+    throw err;
+  });
 };
 
 module.exports = removeDog;
