@@ -10,6 +10,21 @@ let req = {
 };
 
 describe('dog functions', () => {
+  test('addDog: it 406s without a body', () => {
+    return addDog({})
+    .catch(resp => {
+      expect(resp.status).toBe(406);
+      expect(resp.message).toBe('invalid');
+    });
+  })
+
+  test('addDog: it 406s without {body: {dog: [string]}', () => {
+    return addDog({body: {dog: 3}})
+    .catch(resp => {
+      expect(resp.status).toBe(406);
+    });
+  });
+
   test('addDog: lets you add a dog', () => {
     req.body.dog = 'test 1';
     return addDog(req)
@@ -43,9 +58,9 @@ describe('dog functions', () => {
       expect(resp.status).toBe(201);
       expect(resp.message).toBe('dog added');
       expect(resp.list).toBeTruthy();
-      expect(resp.list.indexOf('test 1')).not.toBe(-1);
-      expect(resp.list.indexOf('test 2')).not.toBe(-1);
-      expect(resp.list.indexOf('test 3')).not.toBe(-1);
+      expect(resp.list.findIndex(elem => elem.id === 'test 1')).not.toBe(-1);
+      expect(resp.list.findIndex(elem => elem.id === 'test 2')).not.toBe(-1);
+      expect(resp.list.findIndex(elem => elem.id === 'test 3')).not.toBe(-1);
     });
   });
 
@@ -54,10 +69,18 @@ describe('dog functions', () => {
     .then(resp => {
       expect(resp.status).toBe(200);
       expect(resp.message).toBe('dogs fetched');
-      expect(resp.list.length).toBeGreaterThanOrEqual(2)
-      expect(resp.list.indexOf('test 1')).not.toBe(-1);
-      expect(resp.list.indexOf('test 2')).not.toBe(-1);
-      expect(resp.list.indexOf('test 3')).not.toBe(-1);
+      expect(resp.list.length).toBeGreaterThanOrEqual(3)
+      expect(resp.list.findIndex(elem => elem.id === 'test 1')).not.toBe(-1);
+      expect(resp.list.findIndex(elem => elem.id === 'test 2')).not.toBe(-1);
+      expect(resp.list.findIndex(elem => elem.id === 'test 3')).not.toBe(-1);
+    });
+  });
+
+  test('removeDog: it 406s without a body: {dog: [string]', () => {
+    return removeDog({})
+    .catch(resp => {
+      expect(resp.status).toBe(406);
+      expect(resp.message).toBe('invalid');
     });
   });
 
@@ -83,17 +106,17 @@ describe('dog functions', () => {
     return removeDog(req)
     .then(resp => {
       expect(resp.list).toBeTruthy();
-      expect(resp.list.indexOf('test 2')).toBe(-1);
-      expect(resp.list.indexOf('test 3')).toBe(resp.list.length - 1);
+      expect(resp.list.findIndex(elem => elem.id === 'test 2')).toBe(-1);
+      expect(resp.list.findIndex(elem => elem.id === 'test 3')).not.toBe(-1);
     });
   });
 
   test('cleaning up test cases', () => {
     removeDog({body: {dog: 'test 3'}})
     .then(resp => {
-      expect(resp.list.indexOf('test 1')).toBe(-1);
-      expect(resp.list.indexOf('test 2')).toBe(-1);
-      expect(resp.list.indexOf('test 3')).toBe(-1);
+      expect(resp.list.findIndex(elem => elem.id === 'test 1')).toBe(-1);
+      expect(resp.list.findIndex(elem => elem.id === 'test 2')).toBe(-1);
+      expect(resp.list.findIndex(elem => elem.id === 'test 3')).toBe(-1);
     });
   });
 });

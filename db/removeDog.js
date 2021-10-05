@@ -1,15 +1,17 @@
 const db = require('./');
-const {validate, getDogsFromDB, checkIfAlreadyInDB, removeDogFromDB} = require('./db_functions');
+const validate = require('./functions/validate');
+const getDogsFromDB = require('./functions/getDogsFromDB');
+const checkIfAlreadyInDB = require('./functions/checkIfAlreadyInDB');
+const removeDogFromDB = require('./functions/removeDogFromDB');
 
 const removeDog = (req) => {
   return validate(req)
-  .then(getDogsFromDB)
-  .then(list => checkIfAlreadyInDB(list, req.body.dog))
+  .then(() => checkIfAlreadyInDB(req.body.dog))
   .then(resp => {
-    if (resp.inDB === false) throw ({status: 404, message: 'dog not in list'});
-    return ({list: resp.list, dog: resp.dog});
+    if (resp === false) throw ({status: 404, message: 'dog not in list'});
+    return;
   })
-  .then(removeDogFromDB)
+  .then(() => removeDogFromDB(req.body.dog))
   .then(getDogsFromDB)
   .then(list => ({status: 200, message: 'dog removed', list}))
   .catch(err => {

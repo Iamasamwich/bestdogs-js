@@ -1,10 +1,10 @@
-const {getDogsFromDB} = require('./db_functions');
+const getDogsFromDB = require('./functions/getDogsFromDB');
 
 const getDogs = () => {
   return getDogsFromDB()
     .then(list => ({status: 200, message: 'dogs fetched', list}))
     .catch(err => {
-      throw err;
+      throw err
     });
 };
 
