@@ -1,6 +1,6 @@
 const db = require('./');
 
-module.exports = (req) => {
+const removeDog = (req) => {
 
   async function validate (req) {
     if (
@@ -42,3 +42,5 @@ module.exports = (req) => {
     throw(err)
   })
 };
+
+module.exports = removeDog;

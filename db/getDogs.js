@@ -1,6 +1,6 @@
 const db = require('./');
 
-module.exports = (req) => {
+const getDogs = (req) => {
   async function getDogs() {
     const list = await db.getData('/dogsList');
     return list;
@@ -12,3 +12,6 @@ module.exports = (req) => {
     throw err;
   });
 };
+
+module.exports = getDogs;
+

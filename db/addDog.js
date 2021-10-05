@@ -1,7 +1,7 @@
 const db = require('./');
 const getDogs = require('./getDogs');
 
-module.exports = (req) => {
+const addDog = (req) => {
 
   async function validate (req) {
     if (
@@ -35,3 +35,5 @@ module.exports = (req) => {
     throw err;
   });
 };
+
+module.exports = addDog;

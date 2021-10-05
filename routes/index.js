@@ -1,6 +1,6 @@
 const dogsController = require('../controllers').dogsController;
 
-module.exports = (app) => {
+const router = (app) => {
 
   app.get('/getdogs', dogsController.getDogs);
   app.post('/adddog', dogsController.addDog);
@@ -11,3 +11,4 @@ module.exports = (app) => {
   });
 };
 
+module.exports = router;
