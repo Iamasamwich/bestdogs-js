@@ -1,43 +1,17 @@
 const db = require('./');
+const {validate, getDogsFromDB, checkIfAlreadyInDB, removeDogFromDB} = require('./db_functions');
 
 const removeDog = (req) => {
-
-  async function validate (req) {
-    if (
-      !req.body ||
-      !req.body.dog ||
-      typeof(req.body.dog) !== 'string'
-    ) throw ({status: 406, message: 'invalid'});
-    return req.body.dog;
-  };
-
-  async function getList (url) {
-    const list = await db.getData('/dogsList');
-    return ({list, url});
-  };
-
-  async function checkIfInList ({list, url}) {
-    if (list.indexOf(url) === -1) {
-      throw ({status: 404, message: 'dog not there'});
-    } else {
-      const newList = list.filter(dog => {
-        return dog !== url;
-      });
-      return newList;
-    };
-  };
-
-  async function updateDB (newList) {
-    await db.push('/dogsList', newList);
-    return newList;
-  };
-
-
   return validate(req)
-  .then(getList)
-  .then(checkIfInList)
-  .then(updateDB)
-  .then(newList => ({status: 201, message: 'dog removed', list: newList}))
+  .then(getDogsFromDB)
+  .then(list => checkIfAlreadyInDB(list, req.body.dog))
+  .then(resp => {
+    if (resp.inDB === false) throw ({status: 404, message: 'dog not in list'});
+    return ({list: resp.list, dog: resp.dog});
+  })
+  .then(removeDogFromDB)
+  .then(getDogsFromDB)
+  .then(list => ({status: 200, message: 'dog removed', list}))
   .catch(err => {
     throw(err)
   })

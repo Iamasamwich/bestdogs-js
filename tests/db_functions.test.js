@@ -2,6 +2,7 @@ const getDogs = require('../db/getDogs');
 const addDog = require('../db/addDog');
 const removeDog = require('../db/removeDog');
 
+
 let req = {
   body: {
     dog: ''
@@ -22,7 +23,7 @@ describe('dog functions', () => {
     return addDog(req)
     .catch(resp => {
       expect(resp.status).toBe(409);
-      expect(resp.message).toBe('already there');
+      expect(resp.message).toBe('dog already in list');
     });
   });
 
@@ -42,9 +43,9 @@ describe('dog functions', () => {
       expect(resp.status).toBe(201);
       expect(resp.message).toBe('dog added');
       expect(resp.list).toBeTruthy();
-      expect(resp.list.indexOf('test 1')).toBe(resp.list.length - 3);
-      expect(resp.list.indexOf('test 2')).toBe(resp.list.length - 2);
-      expect(resp.list.indexOf('test 3')).toBe(resp.list.length - 1);
+      expect(resp.list.indexOf('test 1')).not.toBe(-1);
+      expect(resp.list.indexOf('test 2')).not.toBe(-1);
+      expect(resp.list.indexOf('test 3')).not.toBe(-1);
     });
   });
 
@@ -52,8 +53,11 @@ describe('dog functions', () => {
     return getDogs()
     .then(resp => {
       expect(resp.status).toBe(200);
-      expect(resp.message).toBe('dogs fetched... irony');
+      expect(resp.message).toBe('dogs fetched');
       expect(resp.list.length).toBeGreaterThanOrEqual(2)
+      expect(resp.list.indexOf('test 1')).not.toBe(-1);
+      expect(resp.list.indexOf('test 2')).not.toBe(-1);
+      expect(resp.list.indexOf('test 3')).not.toBe(-1);
     });
   });
 
@@ -61,7 +65,7 @@ describe('dog functions', () => {
     req.body.dog = 'test 1';
     return removeDog(req)
     .then(resp => {
-      expect(resp.status).toBe(201);
+      expect(resp.status).toBe(200);
       expect(resp.message).toBe('dog removed');
     });
   });
@@ -70,7 +74,7 @@ describe('dog functions', () => {
     return removeDog(req)
     .catch(resp => {
       expect(resp.status).toBe(404);
-      expect(resp.message).toBe('dog not there');
+      expect(resp.message).toBe('dog not in list');
     });
   });
 
@@ -85,6 +89,11 @@ describe('dog functions', () => {
   });
 
   test('cleaning up test cases', () => {
-    removeDog({body: {dog: 'test 3'}});
-  })
+    removeDog({body: {dog: 'test 3'}})
+    .then(resp => {
+      expect(resp.list.indexOf('test 1')).toBe(-1);
+      expect(resp.list.indexOf('test 2')).toBe(-1);
+      expect(resp.list.indexOf('test 3')).toBe(-1);
+    });
+  });
 });
