@@ -1,10 +1,10 @@
-const validate = require('./functions/validate');
+const validateReq = require('./functions/validateReq');
 const checkIfAlreadyInDB = require('./functions/checkIfAlreadyInDB');
 const addDogToDB = require('./functions/addDogToDB');
 const getDogsFromDB = require('./functions/getDogsFromDB');
 
 const addDog = (req) => {
-  return validate(req)
+  return validateReq(req)
     .then(() => checkIfAlreadyInDB(req.body.dog))
     .then(resp => {
       if (resp === true) {

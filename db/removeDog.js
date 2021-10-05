@@ -1,10 +1,10 @@
-const validate = require('./functions/validate');
+const validateReq = require('./functions/validateReq');
 const getDogsFromDB = require('./functions/getDogsFromDB');
 const checkIfAlreadyInDB = require('./functions/checkIfAlreadyInDB');
 const removeDogFromDB = require('./functions/removeDogFromDB');
 
 const removeDog = (req) => {
-  return validate(req)
+  return validateReq(req)
   .then(() => checkIfAlreadyInDB(req.body.dog))
   .then(resp => {
     if (resp === false) throw ({status: 404, message: 'dog not in list'});
