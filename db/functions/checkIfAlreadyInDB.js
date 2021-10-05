@@ -1,4 +1,4 @@
-const db = require('../');
+const db = require('../db');
 
 const checkIfAlreadyInDB = (dog) => {
   //takes the dog

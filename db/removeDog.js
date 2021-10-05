@@ -1,4 +1,3 @@
-const db = require('./');
 const validate = require('./functions/validate');
 const getDogsFromDB = require('./functions/getDogsFromDB');
 const checkIfAlreadyInDB = require('./functions/checkIfAlreadyInDB');

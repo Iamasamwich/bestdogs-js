@@ -1,4 +1,4 @@
-const db = require('../');
+const db = require('../db');
 
 const addDogToDB = async (dog) => {
   //takes a dog and adds it to the db
